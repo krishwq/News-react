@@ -1,0 +1,11 @@
+body{
+    background-color: #081f48;
+}
+.form-check-input:checked {
+    background-color:black;
+    border-color: black;
+  }
+  .form-check-input:focus{
+    border: 1px solid black;
+    box-shadow: none;
+  }

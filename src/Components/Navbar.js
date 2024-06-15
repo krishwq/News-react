@@ -3,8 +3,9 @@ import React, { Component } from "react";
 
 export class Navbar extends Component {
   render() {
+    let { tooglebtn ,mode} = this.props;
     return (
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className={`navbar navbar-expand-lg navbar-${mode==='dark'?'dark':'info'} bg-${mode==='dark'?'dark':'info'} `} >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             NewsMonkey
@@ -33,6 +34,18 @@ export class Navbar extends Component {
                 </a>
               </li>
             </ul>
+            <div className="form-check form-switch">
+              <input
+                className={`form-check-input`}
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                onClick={tooglebtn}
+              />
+              <label className={`"form-check-label text-${mode==='dark'?'light':'dark'}`} htmlFor="flexSwitchCheckDefault">
+                {mode==='dark'?'Enable-Lightmode':'Enable-Darkmode'}
+              </label>
+            </div>
           </div>
         </div>
       </nav>
