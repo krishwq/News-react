@@ -26,4 +26,9 @@ body{
         width: 100%;
     }
   }
-  
+  img{
+    height: 200px;
+  }
+  .start-100 {
+    left: 85% !important;
+}

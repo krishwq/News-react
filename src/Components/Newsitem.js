@@ -25,7 +25,8 @@ export class Newsitem extends Component {
     }
   };
   render() {
-    let { title, description, imageurl, newsurl, mode } = this.props;
+    let { title, description, imageurl, newsurl, mode, author, date, source } =
+      this.props;
     return (
       <div className="my-3">
         <div
@@ -36,6 +37,12 @@ export class Newsitem extends Component {
             borderColor: mode === "dark" ? "white" : "black",
           }}
         >
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            style={{ zIndex: "1" }}
+          >
+            {source}
+          </span>
           <img src={imageurl} className="card-img-top rounded" alt="..." />
           <div
             className="card-body"
@@ -44,7 +51,10 @@ export class Newsitem extends Component {
               color: mode === "dark" ? "white" : "black",
             }}
           >
-            <h5 className="card-title">{title}...</h5>
+            <h5 className="card-title">
+              {title}...{" "}
+              <span class="badge rounded-pill text-bg-success">Published</span>
+            </h5>
             <p className="card-text">{description}...</p>
             <a
               href={newsurl}
@@ -73,8 +83,7 @@ export class Newsitem extends Component {
                         title: title,
                         url: newsurl,
                       })
-                      .then(() => {
-                      })
+                      .then(() => {})
                       .catch((err) => {
                         console.log(err);
                       });
@@ -86,6 +95,12 @@ export class Newsitem extends Component {
                 <i className="fa-solid fa-share-nodes"></i>
               </button>
             </span>
+          </div>
+          <div className="card-footer" style={{backgroundColor:mode==='dark'?'#0e468b':'#c2e4ec',color:mode==='dark'?'white':'black'}}>
+            <small>
+              By {author === null ? "Unknown" : author} on{" "}
+              {new Date(date).toGMTString()}
+            </small>
           </div>
         </div>
       </div>

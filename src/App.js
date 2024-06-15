@@ -26,14 +26,14 @@ export default class App extends Component {
         <div>
           <Navbar tooglebtn={this.tooglebtn} mode={this.state.mode} />
           <Switch>
-            <Route exact path="/home">
+            <Route exact path="/">
               <News
                 mode={this.state.mode}
                 key="india"
                 pagesize={12}
                 main="q=india"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
+                api="6ebeedef487840ea979d7f3db895d659"
                 content="Top Headlines"
               />
             </Route>
@@ -44,8 +44,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=science"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Science"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Science News"
               />
             </Route>
             <Route exact path="/technology">
@@ -55,8 +55,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=technology"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Technology"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Technology News"
               />
             </Route>
             <Route exact path="/foreign">
@@ -66,8 +66,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=foreign"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Foreign"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Foreign News"
               />
             </Route>
             <Route exact path="/sports">
@@ -77,8 +77,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=sports"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Sports"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Sports News"
               />
             </Route>
             <Route exact path="/health">
@@ -88,8 +88,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="country=in&category=health"
                 chategory="top-headlines"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Health"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Health News"
               />
             </Route>
             <Route exact path="/genarel">
@@ -99,8 +99,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="country=in&category=general"
                 chategory="top-headlines"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Genarel"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Genarel News"
               />
             </Route>
             <Route exact path="/entertainment">
@@ -110,8 +110,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="country=in&category=entertainment"
                 chategory="top-headlines"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Entertainment"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Entertainment News"
               />
             </Route>
             <Route exact path="/business">
@@ -121,8 +121,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="country=in&category=business"
                 chategory="top-headlines"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Business"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Business News"
               />
             </Route>
             <Route exact path="/education">
@@ -132,8 +132,8 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=education"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Education"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Education News"
               />
             </Route>
             <Route exact path="/political">
@@ -143,8 +143,19 @@ export default class App extends Component {
                 pagesize={12}
                 main="q=politics"
                 chategory="everything"
-                api="8ef7402a234444528bb19e850817f443"
-                content="Political"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Political News"
+              />
+            </Route>
+            <Route exact path="/weather">
+              <News
+                mode={this.state.mode}
+                key="weather"
+                pagesize={12}
+                main="q=weather"
+                chategory="everything"
+                api="6ebeedef487840ea979d7f3db895d659"
+                content="Weather News"
               />
             </Route>
           </Switch>

@@ -9,7 +9,7 @@ export class Navbar extends Component {
     return (
       <nav className={`navbar navbar-expand-lg navbar-${mode==='dark'?'dark':'info'} bg-${mode==='dark'?'dark':'info'} `} >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/">
             NewsMonkey
           </Link>
           <button
@@ -73,6 +73,11 @@ export class Navbar extends Component {
               <li className="nav-item">
                 <Link className="nav-link " to="/foreign">
                   Foreign
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/weather">
+                  Weather
                 </Link>
               </li>
 
