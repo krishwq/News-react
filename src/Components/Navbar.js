@@ -1,20 +1,15 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  // Switch,
-  // Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 // import PropTypes from 'prop-types';
 
 export class Navbar extends Component {
   render() {
     let { tooglebtn ,mode} = this.props;
     return (
-      <Router>
       <nav className={`navbar navbar-expand-lg navbar-${mode==='dark'?'dark':'info'} bg-${mode==='dark'?'dark':'info'} `} >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/home">
             NewsMonkey
           </Link>
           <button
@@ -97,7 +92,6 @@ export class Navbar extends Component {
           </div>
         </div>
       </nav>
-      </Router>
     );
   }
 }

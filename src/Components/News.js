@@ -23,10 +23,12 @@ export class News extends Component {
     };
   }
   async componentDidMount() {
+    console.log("entered");
     let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=1&pagesize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsdata = await data.json();
+    console.log(parsdata)
     this.setState({
       articles: parsdata.articles,
       totalResult: parsdata.totalResults,
