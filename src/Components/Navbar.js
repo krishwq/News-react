@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import {
+  BrowserRouter as Router,
+  // Switch,
+  // Route,
   Link
 } from "react-router-dom";
 // import PropTypes from 'prop-types';
@@ -8,6 +11,7 @@ export class Navbar extends Component {
   render() {
     let { tooglebtn ,mode} = this.props;
     return (
+      <Router>
       <nav className={`navbar navbar-expand-lg navbar-${mode==='dark'?'dark':'info'} bg-${mode==='dark'?'dark':'info'} `} >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -37,7 +41,7 @@ export class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link " to="/besiness">
+                <Link className="nav-link " to="/business">
                   Business
                 </Link>
               </li>
@@ -57,7 +61,7 @@ export class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link " to="/sciene">
+                <Link className="nav-link " to="/science">
                   Science
                 </Link>
               </li>
@@ -93,6 +97,7 @@ export class Navbar extends Component {
           </div>
         </div>
       </nav>
+      </Router>
     );
   }
 }

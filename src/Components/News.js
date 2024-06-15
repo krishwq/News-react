@@ -6,15 +6,12 @@ import PropTypes from 'prop-types';
 
 export class News extends Component {
   static defaultProps={
-    country:'in',
     pagesize:9,
-    chategory:'general',
     api:'2bb7e5c1493b4b8d831ff0434ad293cc'
   }
   static propTypes={
-    country:PropTypes.string.isRequired,
     pagesize:PropTypes.number,
-    chategory:PropTypes.string.isRequired,
+    chategory:PropTypes.string,
     api:PropTypes.string
   }
   constructor() {
@@ -26,7 +23,7 @@ export class News extends Component {
     };
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.chategory}&apiKey=${this.props.api}&page=1&pagesize=${this.props.pagesize}`;
+    let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=1&pagesize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsdata = await data.json();
@@ -43,9 +40,10 @@ export class News extends Component {
         Math.ceil(this.state.totalResult / this.props.pagesize)
       )
     ) {
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.chategory}&apiKey=${this.props.api}&page=${
-        this.state.page + 1
-      }&pagesize=${this.props.pagesize}`;
+      let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=${
+      this.state.page + 1
+    }&pagesize=${this.props.pagesize}`
+        
       this.setState({ loading: true });
       let data = await fetch(url);
       let parsdata = await data.json();
@@ -57,7 +55,7 @@ export class News extends Component {
     }
   };
   handlepreviousclick = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.chategory}&apiKey=${this.props.api}&page=${
+    let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=${
       this.state.page - 1
     }&pagesize=${this.props.pagesize}`;
     this.setState({ loading: true });
@@ -79,7 +77,7 @@ export class News extends Component {
           className={`text-center text-${mode === "dark" ? "light" : "dark"} `}
           style={{marginBottom:"35px"}}
         >
-          NewsMonkey-Top Headlines
+          NewsMonkey-{this.props.content}
         </h1>
         {this.state.loading && <Load />}
         {!this.state.loading && (
