@@ -31,7 +31,7 @@ export class Newsitem extends Component {
         <div
           className="card"
           style={{
-            width: "18rem",
+            // width: "18rem",
             border: "1px solid",
             borderColor: mode === "dark" ? "white" : "black",
           }}

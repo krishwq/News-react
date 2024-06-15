@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {
+  Link
+} from "react-router-dom";
 // import PropTypes from 'prop-types';
 
 export class Navbar extends Component {
@@ -7,9 +10,9 @@ export class Navbar extends Component {
     return (
       <nav className={`navbar navbar-expand-lg navbar-${mode==='dark'?'dark':'info'} bg-${mode==='dark'?'dark':'info'} `} >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             NewsMonkey
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -24,40 +27,56 @@ export class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
-                  Top News
-                </a>
+                <Link className="nav-link" aria-current="page" to="/political">
+                  Political
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/about">
-                  Sports
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/about">
+                <Link className="nav-link " to="/education">
                   Education
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/about">
-                  Politics
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/about">
-                  Entertainment
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/about">
+                <Link className="nav-link " to="/besiness">
                   Business
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/about">
+                <Link className="nav-link " to="/entertainment">
                   Entertainment
-                </a>
+                </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/genarel">
+                  Genarel
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/health">
+                  Health
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/sciene">
+                  Science
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/sports">
+                  Sports
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/technology">
+                  Technology
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link " to="/foreign">
+                  Foreign
+                </Link>
+              </li>
+
             </ul>
             <div className="form-check form-switch">
               <input
