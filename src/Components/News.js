@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Newsitem from "./Newsitem";
+import Spinner from "./Components/Spinner";
 
 export class News extends Component {
   
@@ -12,7 +13,7 @@ export class News extends Component {
     };
   }
   async componentDidMount(){
-    let url="https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=2bb7e5c1493b4b8d831ff0434ad293cc&page=1&pagesize=18"
+    let url=`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=8ef7402a234444528bb19e850817f443&page=1&pagesize=${this.props.pagesize}`
     let data=await fetch(url);
     let parsdata=await data.json();
     console.log(parsdata)
@@ -22,10 +23,10 @@ export class News extends Component {
     })
   }
   handlenextclick=async ()=>{
-    if(this.state.page+1>Math.ceil(this.state.totalResult/18)){
+    if(this.state.page+1>Math.ceil(this.state.totalResult/this.props.pagesize)){
 
     }else{
-    let url=`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=2bb7e5c1493b4b8d831ff0434ad293cc&page=${this.state.page+1}&pagesize=18`
+    let url=`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=8ef7402a234444528bb19e850817f443&page=${this.state.page+1}&pagesize=${this.props.pagesize}`
     let data=await fetch(url);
     let parsdata=await data.json();
     console.log(parsdata)
@@ -36,7 +37,7 @@ export class News extends Component {
   }
   }
   handlepreviousclick=async()=>{
-    let url=`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=2bb7e5c1493b4b8d831ff0434ad293cc&page=${this.state.page-1}&pagesize=18`
+    let url=`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=8ef7402a234444528bb19e850817f443&page=${this.state.page-1}&pagesize=${this.props.pagesize}`
     let data=await fetch(url);
     let parsdata=await data.json();
     console.log(parsdata)
@@ -51,11 +52,12 @@ export class News extends Component {
     return (
       <div className="container my-3">
         <h1 className={`text-center text-${mode==='dark'?'light':'dark'} `}>NewsMonkey-Top Headlines</h1>
+        <Spinner/>
 
         <div className="row">
           {this.state.articles.map((element) => {
             return (
-                <div className="col-md-4"  key={element.url}>
+                <div className="col-4"  key={element.url}>
                 <Newsitem
                   title={element.title===null?"":element.title.slice(0,45)}
                   description={element.description===null?"":element.description.slice(0,100)}
@@ -70,7 +72,7 @@ export class News extends Component {
         </div>
         <div className="container d-flex justify-content-between">
         <button type="button" disabled={this.state.page<=1} className={`btn btn-${mode==='dark'?'light':'dark'}`} onClick={this.handlepreviousclick}>&larr; Previous</button>
-        <button type="button" disabled={this.state.page===Math.ceil(this.state.totalResult/18)} className={`btn btn-${mode==='dark'?'light':'dark'}`} onClick={this.handlenextclick}>Next &rarr;</button>
+        <button type="button" disabled={this.state.page===Math.ceil(this.state.totalResult/this.props.pagesize)} className={`btn btn-${mode==='dark'?'light':'dark'}`} onClick={this.handlenextclick}>Next &rarr;</button>
         </div>
       </div>
     );

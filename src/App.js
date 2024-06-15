@@ -24,7 +24,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar tooglebtn={this.tooglebtn} mode={this.state.mode}/>
-        <News mode={this.state.mode}/>
+        <News mode={this.state.mode} pagesize={18}/>
       </div>
     );
   }

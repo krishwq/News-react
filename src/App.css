@@ -5,7 +5,24 @@ body{
     background-color:black;
     border-color: black;
   }
+  .form-check-input{
+  cursor: pointer;
+  }
   .form-check-input:focus{
     border: 1px solid black;
     box-shadow: none;
+  }
+  .card{
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  @media only screen and (max-width:1000px)  {
+    .col-4{
+        width: 50%;
+    }
+  }
+  @media only screen and (max-width:768px)  {
+    .col-4{
+        width: 100%;
+    }
   }
