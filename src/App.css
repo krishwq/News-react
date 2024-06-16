@@ -29,6 +29,12 @@ body{
   img{
     height: 200px;
   }
-  .start-100 {
-    left: 85% !important;
-}
+ #button{
+  display: block;
+  padding: 0.5rem 8px;
+  color: rgba(255, 255, 255,0.55);
+  text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+ }

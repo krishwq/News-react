@@ -1,87 +1,104 @@
 import React, { Component } from "react";
 import Newsitem from "./Newsitem";
 import Load from "./Load";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export class News extends Component {
-  static defaultProps={
-    pagesize:9,
-    api:'2bb7e5c1493b4b8d831ff0434ad293cc'
-  }
-  static propTypes={
-    pagesize:PropTypes.number,
-    chategory:PropTypes.string,
-    api:PropTypes.string
-  }
-  constructor() {
-    super();
+  static defaultProps = {
+    pagesize: 9,
+    totalResult: 0,
+  };
+  static propTypes = {
+    pagesize: PropTypes.number,
+    chategory: PropTypes.string,
+    api: PropTypes.string,
+  };
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       loading: false,
       page: 1,
     };
+    document.title = `NewsMonkey-${this.props.content}`;
   }
   async componentDidMount() {
+    this.props.setprogress(10);
     let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=1&pagesize=${this.props.pagesize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setprogress(30);
     let parsdata = await data.json();
+    this.props.setprogress(70);
     this.setState({
       articles: parsdata.articles,
       totalResult: parsdata.totalResults,
       loading: false,
     });
+    this.props.setprogress(100);
   }
-  handlenextclick = async () => {
-    if (
-      !(
-        this.state.page + 1 >
-        Math.ceil(this.state.totalResult / this.props.pagesize)
-      )
-    ) {
-      let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=${
-      this.state.page + 1
-    }&pagesize=${this.props.pagesize}`
-        
-      this.setState({ loading: true });
-      let data = await fetch(url);
-      let parsdata = await data.json();
-      this.setState({
-        page: this.state.page + 1,
-        articles: parsdata.articles,
-        loading: false,
-      });
+  fetchMoreData = async () => {
+    if (this.state.totalResult > 96) {
+      if (this.state.articles.length <= 96) {
+        let url = `https://newsapi.org/v2/${this.props.chategory}?${
+          this.props.main
+        }&apiKey=${this.props.api}&page=${this.state.page + 1}&pagesize=${
+          this.props.pagesize
+        }`;
+        this.setState({ page: this.state.page + 1 });
+        this.setState({ loading: true });
+        let data = await fetch(url);
+        let parsdata = await data.json();
+        this.setState({
+          articles: this.state.articles.concat(parsdata.articles),
+          totalResult: parsdata.totalResults,
+          loading: false,
+        });
+        console.log(this.state.articles.length + " " + this.state.totalResult);
+      }
+    } else {
+      if (this.state.page <= Math.ceil(this.state.totalResult / 12)) {
+        let url = `https://newsapi.org/v2/${this.props.chategory}?${
+          this.props.main
+        }&apiKey=${this.props.api}&page=${this.state.page + 1}&pagesize=${
+          this.props.pagesize
+        }`;
+        this.setState({ page: this.state.page + 1 });
+        this.setState({ loading: true });
+        let data = await fetch(url);
+        let parsdata = await data.json();
+        this.setState({
+          articles: this.state.articles.concat(parsdata.articles),
+          totalResult: parsdata.totalResults,
+          loading: false,
+        });
+        console.log(this.state.articles.length + " " + this.state.totalResult);
+      }
     }
-  };
-  handlepreviousclick = async () => {
-    let url = `https://newsapi.org/v2/${this.props.chategory}?${this.props.main}&apiKey=${this.props.api}&page=${
-      this.state.page - 1
-    }&pagesize=${this.props.pagesize}`;
-    this.setState({ loading: true });
-    let data = await fetch(url);
-    let parsdata = await data.json();
-    console.log(parsdata);
-    this.setState({
-      page: this.state.page - 1,
-      articles: parsdata.articles,
-      loading: false,
-    });
   };
 
   render() {
     let { mode } = this.props;
     return (
-      <div className="container my-3">
+      <>
         <h1
           className={`text-center text-${mode === "dark" ? "light" : "dark"} `}
-          style={{marginBottom:"35px"}}
+          style={{ marginBottom: "35px", marginTop: "80px" }}
         >
           NewsMonkey-{this.props.content}
         </h1>
-        {this.state.loading && <Load />}
-        {!this.state.loading && (
-          <>
+        <InfiniteScroll
+          dataLength={this.state.articles.length}
+          next={this.fetchMoreData}
+          hasMore={
+            this.state.totalResult > 96
+              ? this.state.articles.length !== 96
+              : this.state.articles.length !== this.state.totalResult
+          }
+          loader={<Load />}
+        >
+          <div className="container">
             <div className="row">
               {this.state.articles.map((element) => {
                 return (
@@ -110,30 +127,9 @@ export class News extends Component {
                 );
               })}
             </div>
-            <div className="container d-flex justify-content-between">
-              <button
-                type="button"
-                disabled={this.state.page <= 1}
-                className={`btn btn-${mode === "dark" ? "light" : "dark"}`}
-                onClick={this.handlepreviousclick}
-              >
-                &larr; Previous
-              </button>
-              <button
-                type="button"
-                disabled={
-                  this.state.page ===
-                  Math.ceil(this.state.totalResult / this.props.pagesize)
-                }
-                className={`btn btn-${mode === "dark" ? "light" : "dark"}`}
-                onClick={this.handlenextclick}
-              >
-                Next &rarr;
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+          </div>
+        </InfiniteScroll>
+      </>
     );
   }
 }

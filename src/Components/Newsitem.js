@@ -35,25 +35,28 @@ export class Newsitem extends Component {
             // width: "18rem",
             border: "1px solid",
             borderColor: mode === "dark" ? "white" : "black",
+            boxShadow:mode === "dark" ? "0px 0px 8px 0.5px white" : "0px 0px 10px 1px black"
           }}
         >
+          <div>
           <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-            style={{ zIndex: "1" }}
+            className=" badge rounded bg-danger"
+            style={{ display:'flex',justifyContent:'flex-end',position:'absolute',right:'0' }}
           >
             {source}
           </span>
+          </div>
           <img src={imageurl} className="card-img-top rounded" alt="..." />
           <div
             className="card-body"
             style={{
-              backgroundColor: mode === "dark" ? "#114c7f" : "#e1ffff",
+              backgroundColor: mode === "dark" ? "#165185" : "#e1ffff",
               color: mode === "dark" ? "white" : "black",
             }}
           >
             <h5 className="card-title">
               {title}...{" "}
-              <span class="badge rounded-pill text-bg-success">Published</span>
+              <span className="badge rounded-pill text-bg-success">Published</span>
             </h5>
             <p className="card-text">{description}...</p>
             <a
@@ -96,7 +99,7 @@ export class Newsitem extends Component {
               </button>
             </span>
           </div>
-          <div className="card-footer" style={{backgroundColor:mode==='dark'?'#0e468b':'#c2e4ec',color:mode==='dark'?'white':'black'}}>
+          <div className="card-footer" style={{backgroundColor:mode==='dark'?'#0a3d7b':'#c2e4ec',color:mode==='dark'?'white':'black'}}>
             <small>
               By {author === null ? "Unknown" : author} on{" "}
               {new Date(date).toGMTString()}
